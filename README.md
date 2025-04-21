@@ -1,3 +1,8 @@
+# TODO
+* Fix the structure
+* Provide instruction how to run
+* Add unit tests
+* Add types frmo Pydantic
 # 0425-auk-pokemon-api
 For the interview
 Random Pokémon Endpoint
