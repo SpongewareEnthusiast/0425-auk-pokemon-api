@@ -34,12 +34,18 @@ app.add_middleware(
 def random_int():
     return randint(1,MAX_POKEMON_ID)
 
+def random_int_exclude_current_id(curent_id: int):
+    new_random = random_int()
+    if (new_random == curent_id):
+        new_random += 1
+    return new_random
+
 def create_wrong_answers(answer_id):
     # convert to 0 based index
     new_ind = answer_id - 1
-    answer_array = [pokemon_names[(new_ind + random_int()) % len(pokemon_names)],
-            pokemon_names[(new_ind + random_int()) % len(pokemon_names)], 
-            pokemon_names[(new_ind + random_int()) % len(pokemon_names)],
+    answer_array = [pokemon_names[(new_ind + random_int_exclude_current_id(answer_id)) % len(pokemon_names)],
+            pokemon_names[(new_ind + random_int_exclude_current_id(answer_id)) % len(pokemon_names)], 
+            pokemon_names[(new_ind + random_int_exclude_current_id(answer_id)) % len(pokemon_names)],
             pokemon_names[new_ind]]
     shuffle(answer_array)
     return answer_array
@@ -73,8 +79,10 @@ async def validate_answer(id: Optional[int] = None, name: Optional[str] = None):
         raise HTTPException(status_code = 422, detail = "Id or name not supplied")
     pokemon_to_check_against = await fetch_pokemon(id)
     is_correct = False
+    print(name)
+    print(pokemon_to_check_against["name"])
     if (pokemon_to_check_against["name"] == name):
-        is_correct: True
+        is_correct = True
     return  { 
             "is_correct": is_correct,
             "image": pokemon_to_check_against["sprites"]["other"]["dream_world"]["front_default"] ,
