@@ -2,6 +2,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from random import randint, shuffle
 from httpx import AsyncClient
+from fastapi.middleware.cors import CORSMiddleware
 
 
 POKEAPI_URL = "https://pokeapi.co/api/v2/pokemon/"
@@ -21,6 +22,13 @@ async def lifespan(app: FastAPI):
     print("APP SHUTTING DOWN")
 
 app = FastAPI(lifespan=lifespan)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"]
+)
 
 
 def random_int():
