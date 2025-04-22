@@ -1,2 +1,16 @@
-.venv
+.mypy_cache
+.vscode
 __pycache__
+.pytest_cache
+dist
+site
+.coverage*
+coverage.xml
+.netlify
+Pipfile.lock
+env3.*
+env
+docs_build
+site_build
+venv
+.venv
