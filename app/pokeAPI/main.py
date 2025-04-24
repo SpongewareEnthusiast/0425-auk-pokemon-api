@@ -8,12 +8,10 @@ from app.pokeAPI.models.models import ValidatedAnswer, RandomPokemon
 
 
 MAX_POKEMON_ID = 50
-POKEMON_NAMES = []
 async def lifespan(app: FastAPI):
     global pokemon_names
     data = await fetch_pokemon_names()
     pokemon_names = [p["name"] for p in data["results"]]
-    POKEMON_NAMES = pokemon_names
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -32,7 +30,7 @@ async def random_pokemon() -> RandomPokemon:
     random_pokemon_obj = {
             "id": random_pokemon_data["id"],
             "image": random_pokemon_data["sprites"]["other"]["dream_world"]["front_default"],
-            "guesses": create_answers(POKEMON_NAMES, generated_id, MAX_POKEMON_ID)
+            "guesses": create_answers(pokemon_names, generated_id, MAX_POKEMON_ID)
         }  
     return random_pokemon_obj
 
