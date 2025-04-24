@@ -1,8 +1,10 @@
-# TODO
-* Fix the structure
-* Provide instruction how to run
-* Add unit tests
-* Add types frmo Pydantic - DONE
+# Run locally
+- clone the repo
+- python -m venv .venv
+- source ./.venv/bin/activate
+- pip install -r ./requirements.txt 
+- cd app/pokeSPI
+- fastapi run main.py
 # 0425-auk-pokemon-api
 For the interview
 Random Pokémon Endpoint
