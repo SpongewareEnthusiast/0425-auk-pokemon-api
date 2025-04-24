@@ -3,7 +3,7 @@
 - python -m venv .venv
 - source ./.venv/bin/activate
 - pip install -r ./requirements.txt 
-- cd app/pokeSPI
+- cd app/pokeAPI
 - fastapi run main.py
 # 0425-auk-pokemon-api
 For the interview
